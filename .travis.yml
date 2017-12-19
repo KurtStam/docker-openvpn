@@ -38,8 +38,8 @@ script:
   - docker run --rm "$image" openssl version
   - official-images/test/run.sh "$image"
   - test/run.sh "$image"
-  - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
-  - docker push "$image"
+#  - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
+#  - docker push "$image"
 
 jobs:
   include:
