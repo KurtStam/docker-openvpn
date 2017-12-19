@@ -47,4 +47,4 @@ jobs:
       env:
         - ARCH=manifest FROM=$BASEIMAGE IMAGE=$BASEIMAGE
       script: 
-      - docker run  -v /var/run/docker.sock:/var/run/docker.sock --rm project31/docker-manifest /bin/bash -c "docker login -u=$DOCKER_USERNAME -p=$DOCKER_PASSWORD; docker manifest create $BASEIMAGE:$VERSION $BASEIMAGE:amd64-$VERSION $BASEIMAGE:arm64; docker manifest annotate $BASEIMAGE:$VERSION $BASEIMAGE:arm64-$VERSION --os linux --arch arm64; docker manifest annotate $BASEIMAGE:$VERSION $BASEIMAGE:amd64-$VERSION --os linux --arch amd64; docker manifest push $BASEIMAGE:$VERSION"
+      - docker run  -v /var/run/docker.sock:/var/run/docker.sock --rm project31/docker-manifest /bin/bash -c "docker manifest create $BASEIMAGE:$VERSION $BASEIMAGE:amd64-$VERSION $BASEIMAGE:arm64; docker manifest annotate $BASEIMAGE:$VERSION $BASEIMAGE:arm64-$VERSION --os linux --arch arm64; docker manifest annotate $BASEIMAGE:$VERSION $BASEIMAGE:amd64-$VERSION --os linux --arch amd64;"
