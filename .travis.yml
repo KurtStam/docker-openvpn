@@ -15,6 +15,7 @@ env:
   matrix:
     - ARCH=amd64 FROM=multiarch/alpine:amd64-v3.6 IMAGE=$BASEIMAGE:amd64-$VERSION
     - ARCH=arm64 FROM=multiarch/alpine:arm64-v3.6 IMAGE=$BASEIMAGE:arm64-$VERSION
+    - ARCH=armhf FROM=multiarch/alpine:armhf-v3.6 IMAGE=$BASEIMAGE:armhf-$VERSION
 
 services:
     - docker
@@ -47,4 +48,4 @@ jobs:
       env:
         - ARCH=manifest FROM=$BASEIMAGE IMAGE=$BASEIMAGE
       script: 
-      - docker run  -v /var/run/docker.sock:/var/run/docker.sock --rm project31/docker-manifest /bin/bash -c "docker manifest create $BASEIMAGE:$VERSION $BASEIMAGE:amd64-$VERSION $BASEIMAGE:arm64; docker manifest annotate $BASEIMAGE:$VERSION $BASEIMAGE:arm64-$VERSION --os linux --arch arm64; docker manifest annotate $BASEIMAGE:$VERSION $BASEIMAGE:amd64-$VERSION --os linux --arch amd64;"
+      - docker run  -v /var/run/docker.sock:/var/run/docker.sock --rm project31/docker-manifest /bin/bash -c "docker manifest create $BASEIMAGE:$VERSION $BASEIMAGE:amd64-$VERSION $BASEIMAGE:arm64-$VERSION $BASEIMAGE:armhf-$VERSION; docker manifest annotate $BASEIMAGE:$VERSION $BASEIMAGE:arm64-$VERSION --os linux --arch arm64; docker manifest annotate $BASEIMAGE:$VERSION $BASEIMAGE:amd64-$VERSION --os linux --arch amd64; docker manifest annotate $BASEIMAGE:$VERSION $BASEIMAGE:armhf-$VERSION --os linux --arch arm --variant v7;"
