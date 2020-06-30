@@ -10,7 +10,7 @@ OpenVPN server in a Docker container complete with an EasyRSA PKI CA.
 
 #### Upstream Links
 
-* Docker Registry @ [project31/openvpn](https://hub.docker.com/r/project31/aarch64-docker-openvpn), w46hich is a
+* Docker Registry @ [project31/openvpn](https://hub.docker.com/r/project31/aarch64-docker-openvpn), which is a
 aarch64 clone of 
 * Docker Registry @ [kylemanna/openvpn](https://hub.docker.com/r/kylemanna/openvpn/)
 * GitHub @ [kylemanna/docker-openvpn](https://github.com/kylemanna/docker-openvpn)
