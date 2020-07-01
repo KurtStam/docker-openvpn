@@ -23,7 +23,7 @@ aarch64 clone of
   their choosing.
 
         export OVPN_DATA="ovpn-data-example"
-        export PUBLIC_URL="-u udp://vpn-ph.voterra.com"
+        export PUBLIC_URL="-u udp://vpn.mydomain.com"
         export DNS_SERVERS="-n 192.168.22.1 -n 8.8.8.8"
 
 * Initialize the `$OVPN_DATA` container that will hold the configuration files
