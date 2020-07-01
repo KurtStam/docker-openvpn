@@ -22,16 +22,18 @@ aarch64 clone of
   service.  Users are encourage to replace `example` with a descriptive name of
   their choosing.
 
-        OVPN_DATA="ovpn-data-example"
-        DNS="your.dnsserver.com"
+        export OVPN_DATA="ovpn-data-example"
+        export PUBLIC_URL="-u udp://vpn-ph.voterra.com"
+        export DNS_SERVERS="-n 192.168.22.1 -n 8.8.8.8"
 
 * Initialize the `$OVPN_DATA` container that will hold the configuration files
   and certificates.  The container will prompt for a passphrase to protect the
   private key used by the newly generated certificate authority.
 
-        docker volume create --name $OVPN_DATA
-        docker run -v $OVPN_DATA:/etc/openvpn --rm project31/aarch64-docker-openvpn ovpn_genconfig -u udp://$DNS
-        docker run -v $OVPN_DATA:/etc/openvpn --rm -it project31/aarch64-docker-openvpn ovpn_initpki
+        docker volume create --name $OVPN_DATA 
+        docker run -v $OVPN_DATA:/etc/openvpn --log-driver=none --rm project31/aarch64-docker-openvpn ovpn_genconfig $PUBLIC_URL $DNS_SERVERS
+        docker run -v $OVPN_DATA:/etc/openvpn --log-driver=none --rm -it project31/aarch64-docker-openvpn touch /etc/openvpn/vars
+        docker run -v $OVPN_DATA:/etc/openvpn --log-driver=none --rm -it project31/aarch64-docker-openvpn ovpn_initpki
 
 * Start OpenVPN server process
 
@@ -39,11 +41,11 @@ aarch64 clone of
 
 * Generate a client certificate without a passphrase
 
-        docker run -v $OVPN_DATA:/etc/openvpn --rm -it project31/aarch64-docker-openvpn easyrsa build-client-full CLIENTNAME nopass
+        docker run -v $OVPN_DATA:/etc/openvpn --log-driver=none --rm -it project31/aarch64-docker-openvpn easyrsa build-client-full CLIENTNAME
 
 * Retrieve the client configuration with embedded certificates
 
-        docker run -v $OVPN_DATA:/etc/openvpn --rm project31/aarch64-docker-openvpn ovpn_getclient CLIENTNAME > CLIENTNAME.ovpn
+        docker run -v $OVPN_DATA:/etc/openvpn --log-driver=none --rm project31/aarch64-docker-openvpn ovpn_getclient CLIENTNAME > CLIENTNAME.ovpn
 
 ## Next Steps
 
